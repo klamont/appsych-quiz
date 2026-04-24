@@ -253,6 +253,7 @@ const PBGS=['pb0','pb1','pb2','pb3','pb4','pb5'];
 const PODS=['pod0','pod1','pod2','pod3','pod4','pod5'];
 
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleAnswers(qs){return qs.map(q=>{const indices=[0,1,2,3];for(let i=3;i>0;i--){const j=Math.floor(Math.random()*(i+1));[indices[i],indices[j]]=[indices[j],indices[i]]}const newA=indices.map(i=>q.a[i]);const newC=indices.indexOf(q.c);return{...q,a:newA,c:newC}})}
 function $(s){return document.querySelector(s)}
 function $$(s){return document.querySelectorAll(s)}
 
@@ -604,10 +605,10 @@ function bindEvents(){
   // Quiz events
   document.querySelectorAll('[data-qunit]').forEach(el=>el.onclick=()=>{const v=el.dataset.qunit;state.quizUnit=v==='all'?null:+v;render()});
   document.querySelectorAll('[data-qcount]').forEach(el=>el.onclick=()=>{state.quizCount=+el.dataset.qcount;render()});
-  document.querySelectorAll('[data-action="quiz-start"]').forEach(el=>el.onclick=()=>{const avail=questions.filter(q=>state.quizUnit===null||q.u===state.quizUnit);state.quizQs=shuffle(avail).slice(0,Math.min(state.quizCount,avail.length));state.quizIdx=0;state.quizSel=null;state.quizShowExp=false;state.quizResults=[];state.quizDone=false;state.quizStarted=true;render()});
+  document.querySelectorAll('[data-action="quiz-start"]').forEach(el=>el.onclick=()=>{const avail=questions.filter(q=>state.quizUnit===null||q.u===state.quizUnit);state.quizQs=shuffleAnswers(shuffle(avail).slice(0,Math.min(state.quizCount,avail.length)));state.quizIdx=0;state.quizSel=null;state.quizShowExp=false;state.quizResults=[];state.quizDone=false;state.quizStarted=true;render()});
   document.querySelectorAll('[data-ans]').forEach(el=>el.onclick=()=>{if(state.quizSel!==null)return;const i=+el.dataset.ans;state.quizSel=i;state.quizShowExp=true;const q=state.quizQs[state.quizIdx];state.quizResults.push({question:q,sel:i,correct:i===q.c});render()});
   document.querySelectorAll('[data-action="quiz-next"]').forEach(el=>el.onclick=()=>{if(state.quizIdx+1>=state.quizQs.length){state.quizDone=true}else{state.quizIdx++;state.quizSel=null;state.quizShowExp=false}render()});
-  document.querySelectorAll('[data-action="quiz-retry"]').forEach(el=>el.onclick=()=>{const avail=questions.filter(q=>state.quizUnit===null||q.u===state.quizUnit);state.quizQs=shuffle(avail).slice(0,Math.min(state.quizCount,avail.length));state.quizIdx=0;state.quizSel=null;state.quizShowExp=false;state.quizResults=[];state.quizDone=false;render()});
+  document.querySelectorAll('[data-action="quiz-retry"]').forEach(el=>el.onclick=()=>{const avail=questions.filter(q=>state.quizUnit===null||q.u===state.quizUnit);state.quizQs=shuffleAnswers(shuffle(avail).slice(0,Math.min(state.quizCount,avail.length)));state.quizIdx=0;state.quizSel=null;state.quizShowExp=false;state.quizResults=[];state.quizDone=false;render()});
   document.querySelectorAll('[data-action="quiz-setup"]').forEach(el=>el.onclick=()=>{state.quizStarted=false;state.quizDone=false;render()});
 
   // Multiplayer events
@@ -616,7 +617,7 @@ function bindEvents(){
   document.querySelectorAll('[data-action="mp-add"]').forEach(el=>el.onclick=()=>{if(state.mpPlayers.length<6){state.mpPlayers.push({name:'',score:0,answers:[]});render()}});
   document.querySelectorAll('[data-mpunit]').forEach(el=>el.onclick=()=>{const v=el.dataset.mpunit;state.mpUnit=v==='all'?null:+v;render()});
   document.querySelectorAll('[data-mpcount]').forEach(el=>el.onclick=()=>{state.mpCount=+el.dataset.mpcount;render()});
-  document.querySelectorAll('[data-action="mp-start"]').forEach(el=>el.onclick=()=>{state.mpPlayers=state.mpPlayers.map((p,i)=>({...p,name:p.name.trim()||'Player '+(i+1),score:0,answers:[]}));const avail=questions.filter(q=>state.mpUnit===null||q.u===state.mpUnit);state.mpQs=shuffle(avail).slice(0,Math.min(state.mpCount,avail.length));state.mpQIdx=0;state.mpPIdx=0;state.mpSel=null;state.mpShowExp=false;state.mpAllAnswered=false;state.mpPhase='playing';render()});
+  document.querySelectorAll('[data-action="mp-start"]').forEach(el=>el.onclick=()=>{state.mpPlayers=state.mpPlayers.map((p,i)=>({...p,name:p.name.trim()||'Player '+(i+1),score:0,answers:[]}));const avail=questions.filter(q=>state.mpUnit===null||q.u===state.mpUnit);state.mpQs=shuffleAnswers(shuffle(avail).slice(0,Math.min(state.mpCount,avail.length)));state.mpQIdx=0;state.mpPIdx=0;state.mpSel=null;state.mpShowExp=false;state.mpAllAnswered=false;state.mpPhase='playing';render()});
   document.querySelectorAll('[data-mpans]').forEach(el=>el.onclick=()=>{if(state.mpSel!==null)return;const i=+el.dataset.mpans;state.mpSel=i;const q=state.mpQs[state.mpQIdx];const ok=i===q.c;state.mpPlayers[state.mpPIdx].score+=ok?1:0;state.mpPlayers[state.mpPIdx].answers.push(i);render()});
   document.querySelectorAll('[data-action="mp-next-turn"]').forEach(el=>el.onclick=()=>{const next=state.mpPIdx+1;if(next<state.mpPlayers.length){state.mpPIdx=next;state.mpSel=null;state.mpShowExp=false}else{state.mpShowExp=true;state.mpAllAnswered=true}render()});
   document.querySelectorAll('[data-action="mp-next-q"]').forEach(el=>el.onclick=()=>{if(state.mpQIdx+1>=state.mpQs.length){state.mpPhase='results'}else{state.mpQIdx++;state.mpPIdx=0;state.mpSel=null;state.mpShowExp=false;state.mpAllAnswered=false}render()});
