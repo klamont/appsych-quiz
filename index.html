@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Psych Prep — Study, Quiz &amp; Compete</title>
+<meta name="description" content="Master AP Psychology with flashcards, quizzes, and multiplayer challenges.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f0f23;--bg2:#1a1a3e;--card:#1e1e4a;--card-h:#252560;--text:#e8e8f0;--text2:#a0a0c0;--text3:#6b6b90;--border:#2a2a5a;--p4:#748ffc;--p5:#5c7cfa;--p6:#4c6ef5;--p6a:rgba(76,110,245,.2);--p7:#4263eb;--a5:#ff9800;--a6:#fb8c00;--grn:#22c55e;--grn-bg:rgba(34,197,94,.15);--grn-bdr:rgba(34,197,94,.3);--red:#ef4444;--red-bg:rgba(239,68,68,.15);--red-bdr:rgba(239,68,68,.3)}
+html{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{min-height:100vh}
+button{cursor:pointer;font:inherit;border:none;background:none;color:inherit}
+input{font:inherit;border:none;outline:none}
+.perspective{perspective:1000px}
+.preserve-3d{transform-style:preserve-3d}
+.backface-hidden{backface-visibility:hidden}
+.flipped .card-inner{transform:rotateY(180deg)}
+.card-inner{transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.card-back{transform:rotateY(180deg)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .3s ease-out}
+.slide-up{animation:slideUp .3s ease-out}
+.progress-bar{height:8px;border-radius:4px;background:#2a2a5a;overflow:hidden;width:100%}
+.progress-fill{height:100%;border-radius:4px;background:var(--p5);transition:width .3s}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--bg2);border-radius:4px}
+::-webkit-scrollbar-thumb{background:var(--p6);border-radius:4px}
+
+/* layout helpers */
+.container{max-width:900px;margin:0 auto;padding:16px}
+.flex{display:flex}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}
+.gap-2{gap:8px}.gap-3{gap:12px}.gap-4{gap:16px}.gap-6{gap:24px}
+.flex-wrap{flex-wrap:wrap}.flex-1{flex:1}.text-center{text-align:center}.text-left{text-align:left}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.w-full{width:100%}
+.mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mb-4{margin-bottom:16px}.mb-6{margin-bottom:24px}.mb-8{margin-bottom:32px}.mb-10{margin-bottom:40px}
+.mt-2{margin-top:8px}.mt-4{margin-top:16px}.mt-6{margin-top:24px}
+.px-3{padding:0 12px}.px-4{padding:0 16px}.py-1{padding:4px 0}.py-2{padding:8px 0}.py-3{padding:12px 0}.py-4{padding:16px 0}
+.p-4{padding:16px}.p-5{padding:20px}.p-6{padding:24px}.p-8{padding:32px}
+.rounded{border-radius:8px}.rounded-lg{border-radius:12px}.rounded-xl{border-radius:16px}.rounded-2xl{border-radius:20px}.rounded-full{border-radius:99px}
+.border{border:1px solid var(--border)}
+.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.overflow-x-auto{overflow-x:auto}
+.shrink-0{flex-shrink:0}
+.hidden{display:none}
+.min-w-0{min-width:0}
+
+/* typography */
+.text-xs{font-size:.75rem}.text-sm{font-size:.875rem}.text-base{font-size:1rem}.text-lg{font-size:1.125rem}.text-xl{font-size:1.25rem}.text-2xl{font-size:1.5rem}.text-3xl{font-size:1.875rem}.text-4xl{font-size:2.25rem}.text-5xl{font-size:3rem}.text-6xl{font-size:3.75rem}
+.font-medium{font-weight:500}.font-bold{font-weight:700}.font-extrabold{font-weight:800}
+.leading-relaxed{line-height:1.7}
+.tracking-wider{letter-spacing:.05em}
+.uppercase{text-transform:uppercase}
+.whitespace-nowrap{white-space:nowrap}
+
+/* colors */
+.text-white{color:#fff}.text-gray-200{color:#e5e5e5}.text-gray-300{color:#d1d5db}.text-gray-400{color:var(--text2)}.text-gray-500{color:var(--text3)}.text-gray-600{color:#4b5563}
+.text-p3{color:#91a7ff}.text-p4{color:var(--p4)}.text-p5{color:var(--p5)}
+.text-a4{color:#ffa726}.text-a5{color:var(--a5)}
+.text-grn{color:var(--grn)}.text-grn3{color:#86efac}.text-grn4{color:rgba(34,197,94,.8)}
+.text-red{color:var(--red)}.text-red3{color:#fca5a5}
+.text-blue{color:#60a5fa}.text-yellow{color:#facc15}.text-orange{color:#fb923c}
+
+/* buttons & cards */
+.btn-primary{padding:12px 24px;border-radius:12px;background:linear-gradient(135deg,var(--p6),var(--p5));color:#fff;font-weight:700;font-size:1.125rem;transition:all .2s;text-align:center}
+.btn-primary:hover{filter:brightness(1.1);box-shadow:0 4px 20px rgba(76,110,245,.3)}
+.btn-accent{padding:12px 24px;border-radius:12px;background:linear-gradient(135deg,var(--a6),var(--a5));color:#fff;font-weight:700;font-size:1.125rem;transition:all .2s;text-align:center}
+.btn-accent:hover{filter:brightness(1.1);box-shadow:0 4px 20px rgba(251,140,0,.3)}
+.btn-sm{padding:8px 16px;border-radius:8px;font-size:.875rem;font-weight:500;transition:all .15s}
+.btn-ghost{background:rgba(255,255,255,.05);color:var(--text2)}.btn-ghost:hover{background:rgba(255,255,255,.1)}
+.btn-active{background:var(--p6);color:#fff}
+
+.card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;transition:all .2s}
+.card:hover{border-color:rgba(76,110,245,.3)}
+.card-mode{cursor:pointer;text-align:left}
+.card-mode:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(76,110,245,.1)}
+
+.answer-btn{width:100%;text-align:left;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.06);background:var(--card);transition:all .15s;cursor:pointer}
+.answer-btn:hover:not(:disabled){background:var(--card-h)}
+.answer-btn:disabled{cursor:default}
+.answer-btn.correct{border-color:var(--grn-bdr);background:var(--grn-bg)}
+.answer-btn.incorrect{border-color:var(--red-bdr);background:var(--red-bg)}
+.answer-btn.selected{border-color:rgba(76,110,245,.4);background:rgba(76,110,245,.1)}
+
+.badge{display:inline-flex;padding:2px 10px;border-radius:6px;font-size:.75rem;font-weight:500}
+.badge-p{background:var(--p6a);color:var(--p4)}
+.badge-grn{background:var(--grn-bg);color:var(--grn)}
+.badge-yel{background:rgba(250,204,21,.15);color:#facc15}
+.badge-red{background:var(--red-bg);color:var(--red)}
+
+.input{width:100%;padding:8px 14px;border-radius:8px;background:rgba(0,0,0,.2);border:1px solid var(--border);color:#fff;transition:border-color .15s}
+.input::placeholder{color:var(--text3)}
+.input:focus{border-color:var(--p5)}
+
+.icon-circle{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;transition:transform .2s}
+.card-mode:hover .icon-circle{transform:scale(1.1)}
+.ic-blue{background:linear-gradient(135deg,#3b82f6,#06b6d4)}.ic-purple{background:linear-gradient(135deg,#a855f7,#ec4899)}.ic-orange{background:linear-gradient(135deg,#f97316,#eab308)}.ic-green{background:linear-gradient(135deg,#22c55e,#10b981)}
+
+.letter-box{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:700;flex-shrink:0;background:rgba(255,255,255,.06);color:var(--text3)}
+.letter-box.correct-box{background:var(--grn);color:#fff}
+.letter-box.incorrect-box{background:var(--red);color:#fff}
+.letter-box.selected-box{background:var(--p6);color:#fff}
+
+.player-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.pd0{background:linear-gradient(135deg,#3b82f6,#06b6d4)}.pd1{background:linear-gradient(135deg,#a855f7,#ec4899)}.pd2{background:linear-gradient(135deg,#f97316,#eab308)}.pd3{background:linear-gradient(135deg,#22c55e,#10b981)}.pd4{background:linear-gradient(135deg,#ef4444,#f43f5e)}.pd5{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.pb0{background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.3)}.pb1{background:rgba(168,85,247,.15);border-color:rgba(168,85,247,.3)}.pb2{background:rgba(249,115,22,.15);border-color:rgba(249,115,22,.3)}.pb3{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.3)}.pb4{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.3)}.pb5{background:rgba(99,102,241,.15);border-color:rgba(99,102,241,.3)}
+.podium-bar{border-radius:12px 12px 0 0;width:96px;opacity:.8}
+.pod0{background:linear-gradient(to top,#3b82f6,#06b6d4)}.pod1{background:linear-gradient(to top,#a855f7,#ec4899)}.pod2{background:linear-gradient(to top,#f97316,#eab308)}.pod3{background:linear-gradient(to top,#22c55e,#10b981)}.pod4{background:linear-gradient(to top,#ef4444,#f43f5e)}.pod5{background:linear-gradient(to top,#6366f1,#8b5cf6)}
+
+/* pulse */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.pulse{animation:pulse 2s ease-in-out infinite}
+.anim-pulse{animation:pulse 1.5s ease-in-out infinite}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+// ============================
+// DATA
+// ============================
+const UNITS=[{number:1,name:"Scientific Foundations of Psychology"},{number:2,name:"Biological Bases of Behavior"},{number:3,name:"Sensation and Perception"},{number:4,name:"Learning"},{number:5,name:"Cognitive Psychology"},{number:6,name:"Developmental Psychology"},{number:7,name:"Motivation, Emotion, and Personality"},{number:8,name:"Clinical Psychology"},{number:9,name:"Social Psychology"}];
+
+const questions=[
+{id:1,u:1,q:"A researcher finds that students who sleep more tend to have higher GPAs. What can be concluded from this correlational study?",a:[{t:"More sleep causes higher GPAs",e:"Incorrect. Correlation does not imply causation. A correlational study can only show a relationship between variables, not that one causes the other. There could be a third variable (e.g., better time management) influencing both."},{t:"Higher GPAs cause students to sleep more",e:"Incorrect. This reverses the assumed direction, but either way, a correlational study cannot establish any causal relationship—only that two variables are related."},{t:"There is a relationship between sleep and GPA",e:"Correct. Correlational studies can only establish that a relationship (positive, negative, or zero) exists between two variables. They cannot determine cause and effect."},{t:"Sleep is the independent variable affecting GPA",e:"Incorrect. Correlational studies do not have independent or dependent variables—those terms apply to experiments. Without random assignment and manipulation, no causal claim can be made."}],c:2,d:"easy"},
+{id:2,u:1,q:"Which research method would best allow a psychologist to determine whether a new therapy actually reduces anxiety?",a:[{t:"Case study",e:"Incorrect. A case study provides deep detail about one individual but cannot control for confounding variables or generalize to a population."},{t:"Naturalistic observation",e:"Incorrect. Naturalistic observation describes behavior in its natural setting but involves no manipulation of variables."},{t:"Survey research",e:"Incorrect. Surveys collect self-reported data but cannot control for variables or establish causation."},{t:"A randomized controlled experiment",e:"Correct. Only an experiment with random assignment and manipulation of the independent variable can establish a cause-and-effect relationship."}],c:3,d:"easy"},
+{id:3,u:1,q:"Dr. Martinez studies how cultural expectations influence memory recall in elderly adults. Which psychological perspective best describes her approach?",a:[{t:"Biological",e:"Incorrect. The biological perspective focuses on brain structures, neurotransmitters, and genetics—not cultural expectations."},{t:"Sociocultural",e:"Correct. The sociocultural perspective examines how social and cultural contexts influence behavior and mental processes."},{t:"Psychodynamic",e:"Incorrect. The psychodynamic perspective focuses on unconscious drives and early childhood experiences."},{t:"Behavioral",e:"Incorrect. The behavioral perspective focuses on observable behaviors shaped by environmental stimuli and reinforcement."}],c:1,d:"medium"},
+{id:4,u:1,q:"In an experiment testing whether caffeine improves reaction time, participants drink either caffeinated or decaffeinated coffee. The dependent variable is:",a:[{t:"Whether participants drink caffeinated or decaffeinated coffee",e:"Incorrect. This is the independent variable—the factor the researcher manipulates."},{t:"Reaction time",e:"Correct. The dependent variable (DV) is what the researcher measures as the outcome."},{t:"The amount of coffee consumed",e:"Incorrect. This could be a confounding variable if not controlled."},{t:"The random assignment of participants",e:"Incorrect. Random assignment is a procedural element, not a variable being measured."}],c:1,d:"easy"},
+{id:5,u:1,q:"A psychologist studies the same group of children at ages 5, 10, and 15 to track problem-solving changes. This is a:",a:[{t:"Cross-sectional study",e:"Incorrect. Cross-sectional compares different age groups at one point in time."},{t:"Longitudinal study",e:"Correct. A longitudinal study follows the same participants over an extended period, measuring changes at multiple time points."},{t:"Case study",e:"Incorrect. A case study is an in-depth investigation of a single individual, not systematic tracking over years."},{t:"Cross-sequential study",e:"Incorrect. Cross-sequential combines both approaches by studying multiple age groups over time."}],c:1,d:"easy"},
+{id:6,u:1,q:"Which ethical principle requires that participants be told about the nature of research and agree to participate?",a:[{t:"Debriefing",e:"Incorrect. Debriefing occurs after the study—explaining the true purpose."},{t:"Confidentiality",e:"Incorrect. Confidentiality means protecting participants' personal data."},{t:"Informed consent",e:"Correct. Informed consent requires participants be told about procedures, risks, and their right to withdraw before agreeing to participate."},{t:"Random assignment",e:"Incorrect. Random assignment is a methodological technique, not an ethical principle."}],c:2,d:"easy"},
+{id:55,u:1,q:"A researcher who only samples college students for a study on adult decision-making may have problems with:",a:[{t:"The placebo effect",e:"Incorrect. The placebo effect is an experimental artifact, not a sampling issue."},{t:"External validity (generalizability)",e:"Correct. Using only college students limits generalizability to the broader adult population, threatening external validity."},{t:"The double-blind procedure",e:"Incorrect. Double-blind is a bias-control method, unrelated to sampling."},{t:"Internal validity",e:"Incorrect. Internal validity is about controlling confounds. Non-representative sampling threatens external validity."}],c:1,d:"medium"},
+{id:7,u:2,q:"Which neurotransmitter is most directly associated with voluntary muscle movement and is depleted in Alzheimer's disease?",a:[{t:"Dopamine",e:"Incorrect. Dopamine is linked to reward and motivation; its depletion causes Parkinson's disease, not Alzheimer's."},{t:"Serotonin",e:"Incorrect. Serotonin regulates mood, sleep, and appetite. Its imbalance is associated with depression."},{t:"Acetylcholine (ACh)",e:"Correct. ACh triggers muscle contraction and plays a crucial role in memory. ACh-producing neurons deteriorate in Alzheimer's disease."},{t:"GABA",e:"Incorrect. GABA is the major inhibitory neurotransmitter, linked to anxiety disorders."}],c:2,d:"medium"},
+{id:8,u:2,q:"Damage to Broca's area in the left frontal lobe would most likely result in:",a:[{t:"Inability to understand spoken language",e:"Incorrect. Understanding language is associated with Wernicke's area in the temporal lobe."},{t:"Difficulty producing fluent speech",e:"Correct. Broca's area controls speech production. Damage causes slow, effortful speech (Broca's aphasia) while comprehension remains intact."},{t:"Loss of vision in both eyes",e:"Incorrect. Vision is processed in the occipital lobe."},{t:"Inability to form new long-term memories",e:"Incorrect. Memory formation is primarily associated with the hippocampus."}],c:1,d:"medium"},
+{id:9,u:2,q:"The 'fight-or-flight' response is activated by the:",a:[{t:"Parasympathetic nervous system",e:"Incorrect. The parasympathetic system calms the body ('rest and digest')."},{t:"Somatic nervous system",e:"Incorrect. The somatic system controls voluntary skeletal muscle movements."},{t:"Sympathetic nervous system",e:"Correct. The sympathetic nervous system activates fight-or-flight by increasing heart rate, dilating pupils, and releasing adrenaline."},{t:"Central nervous system",e:"Incorrect. Fight-or-flight is specifically triggered by the sympathetic division of the autonomic nervous system."}],c:2,d:"easy"},
+{id:10,u:2,q:"Split-brain research by Roger Sperry demonstrated that:",a:[{t:"The two hemispheres have identical functions",e:"Incorrect. Sperry showed the opposite—the hemispheres have specialized functions."},{t:"Cutting the corpus callosum prevents all brain function",e:"Incorrect. Split-brain patients function relatively normally in daily life."},{t:"Each hemisphere can independently process information and has specialized functions",e:"Correct. Sperry's Nobel Prize-winning research showed lateralization: left hemisphere handles language/analytical tasks; right handles spatial/holistic tasks."},{t:"The right hemisphere controls language in all people",e:"Incorrect. In most people, the LEFT hemisphere is dominant for language."}],c:2,d:"medium"},
+{id:11,u:2,q:"Which brain structure serves as the 'relay station,' directing sensory information to the cerebral cortex?",a:[{t:"Hypothalamus",e:"Incorrect. The hypothalamus regulates homeostasis—hunger, thirst, temperature."},{t:"Thalamus",e:"Correct. The thalamus is the brain's sensory switchboard, routing all incoming sensory information (except smell) to the correct cortical areas."},{t:"Amygdala",e:"Incorrect. The amygdala processes emotions, especially fear."},{t:"Cerebellum",e:"Incorrect. The cerebellum coordinates voluntary movement and balance."}],c:1,d:"easy"},
+{id:12,u:2,q:"An action potential occurs when:",a:[{t:"The neuron is in its resting state at -70mV",e:"Incorrect. At -70mV, the neuron is at rest with no signal being transmitted."},{t:"Neurotransmitters are reabsorbed through reuptake",e:"Incorrect. Reuptake occurs after the action potential and neurotransmitter release."},{t:"The neuron reaches the threshold of excitation and fires",e:"Correct. When stimulation reaches threshold (~-55mV), sodium channels open and the neuron rapidly depolarizes following the all-or-none principle."},{t:"The myelin sheath deteriorates",e:"Incorrect. Myelin deterioration (as in MS) slows neural signals."}],c:2,d:"medium"},
+{id:48,u:2,q:"Which brain structure is most involved in forming new explicit (declarative) memories?",a:[{t:"Cerebellum",e:"Incorrect. The cerebellum handles procedural/implicit memories and motor coordination."},{t:"Hippocampus",e:"Correct. The hippocampus is essential for forming new explicit memories. Damage (as in patient H.M.) prevents forming new long-term declarative memories."},{t:"Medulla",e:"Incorrect. The medulla controls vital automatic functions like heartbeat and breathing."},{t:"Prefrontal cortex",e:"Incorrect. The prefrontal cortex handles working memory and executive functions."}],c:1,d:"medium"},
+{id:57,u:2,q:"Plasticity in the brain refers to:",a:[{t:"The brain's inability to change after critical periods",e:"Incorrect. This is the opposite of plasticity."},{t:"The brain's ability to reorganize and form new neural connections throughout life",e:"Correct. Neuroplasticity allows the brain to compensate for injury, adapt to new experiences, and continue learning throughout life."},{t:"The hardening of neural pathways with age",e:"Incorrect. Plasticity refers to flexibility, not rigidity."},{t:"The genetic programming of brain structures before birth",e:"Incorrect. Plasticity describes experience-dependent changes, not prenatal programming."}],c:1,d:"easy"},
+{id:13,u:3,q:"The minimum stimulation needed to detect a stimulus 50% of the time is called the:",a:[{t:"Difference threshold",e:"Incorrect. The difference threshold (JND) is the minimum change needed to detect a difference between two stimuli."},{t:"Absolute threshold",e:"Correct. The absolute threshold is the minimum intensity of a stimulus that can be detected 50% of the time."},{t:"Signal detection threshold",e:"Incorrect. Signal detection theory examines decisions about detecting stimuli amidst noise—it's a theory, not a threshold measurement."},{t:"Weber's law",e:"Incorrect. Weber's law states that the JND is a constant proportion of the original stimulus."}],c:1,d:"easy"},
+{id:14,u:3,q:"Which theory of color vision best explains afterimages (e.g., staring at green then seeing red)?",a:[{t:"Trichromatic theory",e:"Incorrect. Trichromatic theory explains color vision through three cone types but doesn't explain afterimages."},{t:"Opponent-process theory",e:"Correct. Opponent-process theory proposes color vision is processed in opposing pairs (red-green, blue-yellow). After staring at one color, opponent neurons rebound, producing the complementary afterimage."},{t:"Place theory",e:"Incorrect. Place theory relates to hearing, not vision."},{t:"Gate-control theory",e:"Incorrect. Gate-control theory explains pain perception."}],c:1,d:"medium"},
+{id:16,u:3,q:"When you suddenly hear your name spoken across a noisy party room, this demonstrates:",a:[{t:"Selective attention",e:"Incorrect. While related, selective attention is deliberately focusing. The cocktail party effect is about unattended information grabbing attention."},{t:"The cocktail party effect",e:"Correct. The cocktail party effect is the ability to detect personally relevant stimuli (like your name) in an unattended channel."},{t:"Sensory adaptation",e:"Incorrect. Sensory adaptation is diminishing sensitivity to constant stimuli—the opposite of suddenly noticing something."},{t:"Subliminal perception",e:"Incorrect. Subliminal perception involves stimuli below conscious threshold. Hearing your name is above threshold."}],c:1,d:"easy"},
+{id:17,u:3,q:"According to the Gestalt principle of closure, we tend to:",a:[{t:"Group nearby objects together",e:"Incorrect. This describes the principle of proximity."},{t:"See smooth, continuous patterns rather than jagged ones",e:"Incorrect. This describes the principle of continuity."},{t:"Perceive incomplete figures as complete, filling in gaps",e:"Correct. Closure means our brain fills in missing parts to perceive a complete figure."},{t:"Group objects that look similar",e:"Incorrect. This describes the principle of similarity."}],c:2,d:"easy"},
+{id:52,u:3,q:"Sensory adaptation is best described as:",a:[{t:"The brain's ability to prioritize threatening stimuli",e:"Incorrect. That relates to selective attention and threat detection systems."},{t:"Decreased sensitivity to a constant, unchanging stimulus over time",e:"Correct. Sensory adaptation means receptor cells become less responsive to an unchanging stimulus—like not noticing a watch on your wrist."},{t:"The conversion of sensory energy into neural impulses",e:"Incorrect. This describes transduction."},{t:"The ability to detect very faint stimuli in a quiet environment",e:"Incorrect. That relates to absolute threshold."}],c:1,d:"easy"},
+{id:18,u:4,q:"In Pavlov's experiment, the bell before conditioning is considered a(n):",a:[{t:"Unconditioned stimulus (US)",e:"Incorrect. The US naturally triggers a response—the food was the US."},{t:"Conditioned stimulus (CS)",e:"Incorrect. The bell becomes the CS only AFTER pairing with food."},{t:"Neutral stimulus (NS)",e:"Correct. Before conditioning, the bell is neutral—it doesn't produce salivation. Only after pairing with food does it become a CS."},{t:"Conditioned response (CR)",e:"Incorrect. A CR is a learned behavior, not a stimulus."}],c:2,d:"easy"},
+{id:19,u:4,q:"A child touches a hot stove and subsequently avoids ALL stoves. This is an example of:",a:[{t:"Stimulus discrimination",e:"Incorrect. Discrimination is distinguishing between similar stimuli. The child is doing the opposite."},{t:"Stimulus generalization",e:"Correct. The child generalizes the fear response from the hot stove to all stoves."},{t:"Spontaneous recovery",e:"Incorrect. That's the reappearance of an extinguished response after rest."},{t:"Higher-order conditioning",e:"Incorrect. That involves pairing a new NS with an established CS."}],c:1,d:"easy"},
+{id:20,u:4,q:"A variable-ratio schedule of reinforcement produces:",a:[{t:"Slow, steady responding with regular pauses",e:"Incorrect. This describes a fixed-interval schedule (scalloped pattern)."},{t:"High, steady rates of responding that are highly resistant to extinction",e:"Correct. Variable-ratio schedules (like slot machines) produce the highest, most consistent response rates because reinforcement is unpredictable."},{t:"A burst of responding followed by a pause after each reinforcement",e:"Incorrect. This describes a fixed-ratio schedule."},{t:"Low response rates with little motivation",e:"Incorrect. Variable-ratio schedules are among the most motivating."}],c:1,d:"medium"},
+{id:21,u:4,q:"Albert Bandura's Bobo doll experiment demonstrated that children:",a:[{t:"Have an innate drive toward aggression",e:"Incorrect. Children who didn't see the aggressive model were much less aggressive."},{t:"Can learn aggressive behaviors through observation without direct reinforcement",e:"Correct. Bandura showed children imitated aggression they observed without being directly reinforced, demonstrating observational (social) learning."},{t:"Will only be aggressive if directly rewarded",e:"Incorrect. The key finding was imitation without any reward."},{t:"Cannot distinguish between real and pretend aggression",e:"Incorrect. The experiment was about learning through observation, not distinguishing types of aggression."}],c:1,d:"easy"},
+{id:22,u:4,q:"Negative reinforcement is best defined as:",a:[{t:"Punishing an unwanted behavior",e:"Incorrect. Common misconception! Punishment decreases behavior; negative reinforcement increases it. 'Negative' means removing something."},{t:"Removing an aversive stimulus to increase a behavior",e:"Correct. Negative reinforcement strengthens behavior by removing something unpleasant. Example: taking aspirin removes a headache, making you more likely to take aspirin."},{t:"Adding an unpleasant consequence after a behavior",e:"Incorrect. This describes positive punishment."},{t:"Ignoring a behavior until it decreases",e:"Incorrect. This describes extinction."}],c:1,d:"medium"},
+{id:51,u:4,q:"Garcia and Koelling's taste-aversion research demonstrated that:",a:[{t:"All stimuli can be equally associated",e:"Incorrect. Garcia showed the exact opposite—organisms are biologically prepared for certain associations."},{t:"Organisms are biologically prepared to associate certain stimuli with certain responses",e:"Correct. Rats easily associated taste (not light/sound) with nausea, even with a long delay, showing biological preparedness in learning."},{t:"Classical conditioning requires many repeated pairings",e:"Incorrect. Taste aversion can be learned in a single trial."},{t:"Operant conditioning is more powerful than classical conditioning",e:"Incorrect. Garcia's research was about biological constraints on classical conditioning."}],c:1,d:"hard"},
+{id:23,u:5,q:"George Miller's research found short-term memory capacity is approximately:",a:[{t:"3 plus or minus 1 items",e:"Incorrect. While recent research suggests 3-4, Miller's classic finding (tested on AP exam) is 7 ± 2."},{t:"7 plus or minus 2 items",e:"Correct. Miller's 'magical number seven' paper (1956) found STM holds about 7 items (± 2). Capacity can be expanded through chunking."},{t:"12 plus or minus 3 items",e:"Incorrect. This significantly overestimates STM capacity."},{t:"Unlimited items for up to 30 seconds",e:"Incorrect. STM is limited in both capacity (~7 items) and duration (~15-30 sec)."}],c:1,d:"easy"},
+{id:24,u:5,q:"The misinformation effect occurs when:",a:[{t:"People forget information due to the passage of time",e:"Incorrect. That's Ebbinghaus's forgetting curve. The misinformation effect involves distortion, not forgetting."},{t:"Post-event information alters a person's memory of an original event",e:"Correct. Elizabeth Loftus showed that misleading information presented after an event can distort or replace the original memory."},{t:"People suppress traumatic memories unconsciously",e:"Incorrect. That describes repression, a psychodynamic defense mechanism."},{t:"Memories from childhood are inaccessible to adults",e:"Incorrect. That describes infantile amnesia."}],c:1,d:"medium"},
+{id:25,u:5,q:"Sarah keeps trying the same problem-solving approach even though it isn't working. This is an example of:",a:[{t:"An algorithm",e:"Incorrect. An algorithm is a step-by-step procedure that guarantees a solution."},{t:"Mental set",e:"Correct. A mental set is the tendency to use strategies that worked before even when they're no longer effective—a type of fixation."},{t:"A heuristic",e:"Incorrect. A heuristic is a mental shortcut, not rigid repetition of a failed strategy."},{t:"Divergent thinking",e:"Incorrect. Divergent thinking generates many creative solutions—the opposite of being stuck."}],c:1,d:"medium"},
+{id:26,u:5,q:"Which type of memory has essentially unlimited capacity and can store information for a lifetime?",a:[{t:"Sensory memory",e:"Incorrect. Sensory memory holds lots of information but only for fractions of a second."},{t:"Short-term memory",e:"Incorrect. STM has limited capacity (~7 items) and duration (~15-30 sec)."},{t:"Working memory",e:"Incorrect. Working memory is a temporary workspace with limited capacity."},{t:"Long-term memory",e:"Correct. Long-term memory has virtually unlimited capacity and can store information indefinitely."}],c:3,d:"easy"},
+{id:27,u:5,q:"The availability heuristic leads people to:",a:[{t:"Make decisions based on how easily examples come to mind",e:"Correct. The availability heuristic causes people to estimate probability based on how readily examples can be recalled. Dramatic events (plane crashes) seem more common because they're more memorable."},{t:"Judge likelihood based on similarity to a prototype",e:"Incorrect. This describes the representativeness heuristic."},{t:"Stick with an initial estimate despite new evidence",e:"Incorrect. This describes anchoring bias."},{t:"Seek information that confirms existing beliefs",e:"Incorrect. This describes confirmation bias."}],c:0,d:"medium"},
+{id:49,u:5,q:"The encoding specificity principle suggests memory retrieval is best when:",a:[{t:"Information is encoded using only visual imagery",e:"Incorrect. The principle is about matching contexts, not encoding type."},{t:"The retrieval context matches the encoding context",e:"Correct. Tulving's principle states memory is best when retrieval conditions match encoding conditions, explaining context-dependent and state-dependent memory."},{t:"Material is studied using spaced repetition",e:"Incorrect. The spacing effect is a separate phenomenon."},{t:"Memories are stored in only one brain location",e:"Incorrect. Memories are distributed across multiple brain areas."}],c:1,d:"hard"},
+{id:58,u:5,q:"Noam Chomsky argued that language acquisition is best explained by:",a:[{t:"Operant conditioning and reinforcement",e:"Incorrect. This was Skinner's position, which Chomsky famously critiqued."},{t:"An innate language acquisition device (LAD)",e:"Correct. Chomsky proposed humans are born with a LAD—an innate capacity for learning language, explaining why children everywhere acquire language rapidly through similar stages."},{t:"Pure imitation of adult speech",e:"Incorrect. Children produce novel sentences they've never heard (e.g., 'I goed')."},{t:"Classical conditioning of word associations",e:"Incorrect. Grammar involves complex rule-learning that conditioning cannot explain."}],c:1,d:"medium"},
+{id:28,u:6,q:"According to Piaget, a child who understands that water amount stays the same when poured into a different-shaped glass has achieved:",a:[{t:"Object permanence",e:"Incorrect. Object permanence (sensorimotor stage) is understanding objects exist when out of sight."},{t:"Conservation",e:"Correct. Conservation is understanding that quantity remains the same despite changes in appearance, developed in the concrete operational stage (ages 7-11)."},{t:"Egocentrism",e:"Incorrect. Egocentrism is a limitation (inability to see others' perspectives), not an achievement."},{t:"Assimilation",e:"Incorrect. Assimilation is fitting new information into existing schemas, not a specific understanding."}],c:1,d:"easy"},
+{id:29,u:6,q:"In Harlow's monkey experiments, infant monkeys preferred the cloth mother over the wire mother with food, demonstrating:",a:[{t:"Imprinting",e:"Incorrect. Imprinting (Lorenz) is rapid attachment to the first moving thing seen, studied in birds."},{t:"Contact comfort",e:"Correct. Harlow showed contact comfort—physical warmth and softness—was more important than feeding in forming attachment."},{t:"Operant conditioning",e:"Incorrect. If attachment were based on food reinforcement, monkeys would prefer the wire mother."},{t:"Authoritative parenting",e:"Incorrect. Authoritative parenting (Baumrind) is a human parenting style."}],c:1,d:"easy"},
+{id:30,u:6,q:"Erikson's 'Identity vs. Role Confusion' stage primarily occurs during:",a:[{t:"Early childhood (1-3 years)",e:"Incorrect. That's 'Autonomy vs. Shame and Doubt.'"},{t:"Middle childhood (6-12 years)",e:"Incorrect. That's 'Industry vs. Inferiority.'"},{t:"Adolescence (12-18 years)",e:"Correct. Identity vs. Role Confusion is Erikson's fifth stage. Teens explore roles, values, and goals to form a coherent identity."},{t:"Young adulthood (18-40 years)",e:"Incorrect. That's 'Intimacy vs. Isolation.'"}],c:2,d:"easy"},
+{id:31,u:6,q:"Kohlberg's conventional level of moral reasoning is based on:",a:[{t:"Avoiding punishment and gaining rewards",e:"Incorrect. This is preconventional morality (stages 1-2)."},{t:"Maintaining social order and gaining approval",e:"Correct. Conventional morality (stages 3-4) involves conforming to social expectations and upholding laws."},{t:"Abstract ethical principles that may override laws",e:"Incorrect. This is postconventional morality (stages 5-6)."},{t:"An innate sense of fairness present from birth",e:"Incorrect. Kohlberg's theory involves developmental stages, not innate morality."}],c:1,d:"medium"},
+{id:32,u:6,q:"Mary Ainsworth's 'Strange Situation' experiment identified different types of:",a:[{t:"Parenting styles",e:"Incorrect. Parenting styles were classified by Diana Baumrind."},{t:"Attachment styles in infants",e:"Correct. Ainsworth observed how infants reacted to separation from and reunion with caregivers, identifying secure, anxious-ambivalent, and avoidant attachment."},{t:"Cognitive development stages",e:"Incorrect. That was Piaget's contribution."},{t:"Temperament categories in newborns",e:"Incorrect. Temperament categories were identified by Thomas and Chess."}],c:1,d:"easy"},
+{id:54,u:6,q:"A child in Piaget's preoperational stage is most likely to demonstrate:",a:[{t:"Abstract hypothetical reasoning",e:"Incorrect. That's the formal operational stage (12+)."},{t:"Egocentrism and difficulty with conservation tasks",e:"Correct. The preoperational stage (2-7) features egocentrism, centration, and failure on conservation tasks."},{t:"Logical operations with concrete objects",e:"Incorrect. That defines the concrete operational stage (7-11)."},{t:"Object permanence and stranger anxiety",e:"Incorrect. Those are sensorimotor stage achievements (0-2)."}],c:1,d:"medium"},
+{id:33,u:7,q:"According to Maslow, which need must be met before a person can focus on self-actualization?",a:[{t:"Physiological needs only",e:"Incorrect. Multiple levels must be satisfied: physiological → safety → belonging → esteem → self-actualization."},{t:"Esteem needs",e:"Correct. Esteem needs are immediately below self-actualization. All lower needs must be reasonably satisfied first."},{t:"Safety needs only",e:"Incorrect. Safety is only the second level. Belonging and esteem still need fulfillment."},{t:"Self-actualization has no prerequisites",e:"Incorrect. Maslow's entire theory is hierarchical."}],c:1,d:"easy"},
+{id:34,u:7,q:"The James-Lange theory of emotion proposes that:",a:[{t:"We experience emotion and physiological arousal simultaneously",e:"Incorrect. That's the Cannon-Bard theory."},{t:"We first experience physiological arousal, then interpret it as an emotion",e:"Correct. James-Lange: see bear → heart races → interpret racing heart as fear. Body reacts first, then we feel emotion."},{t:"We cognitively appraise a situation before feeling emotion",e:"Incorrect. That's Lazarus's appraisal theory."},{t:"We label arousal based on cognitive interpretation of the situation",e:"Incorrect. That's Schachter-Singer two-factor theory."}],c:1,d:"medium"},
+{id:35,u:7,q:"In the Big Five, a person who is organized, disciplined, and goal-oriented scores high on:",a:[{t:"Agreeableness",e:"Incorrect. Agreeableness is about cooperation, trust, and compassion."},{t:"Neuroticism",e:"Incorrect. Neuroticism is about experiencing negative emotions."},{t:"Openness to experience",e:"Incorrect. Openness is about curiosity and creativity."},{t:"Conscientiousness",e:"Correct. Conscientiousness is characterized by organization, dependability, self-discipline, and achievement-striving."}],c:3,d:"easy"},
+{id:36,u:7,q:"According to Freud, the personality part operating on the 'reality principle' is the:",a:[{t:"Id",e:"Incorrect. The id operates on the pleasure principle—seeking immediate gratification."},{t:"Ego",e:"Correct. The ego mediates between the id's impulses and the superego's moral demands, seeking realistic ways to satisfy desires."},{t:"Superego",e:"Incorrect. The superego represents internalized moral standards."},{t:"Collective unconscious",e:"Incorrect. That's Jung's concept, not Freud's."}],c:1,d:"easy"},
+{id:37,u:7,q:"A person who attributes success to hard work but blames failures on bad luck is demonstrating:",a:[{t:"Fundamental attribution error",e:"Incorrect. FAE is about explaining others' behavior, not your own outcomes."},{t:"Self-serving bias",e:"Correct. Self-serving bias attributes successes to internal factors and failures to external factors, protecting self-esteem."},{t:"Just-world hypothesis",e:"Incorrect. Just-world hypothesis is the belief that people get what they deserve."},{t:"Actor-observer bias",e:"Incorrect. That's attributing your behavior to situations but others' to character."}],c:1,d:"medium"},
+{id:53,u:7,q:"According to the Yerkes-Dodson law, performance is best at:",a:[{t:"The highest possible level of arousal",e:"Incorrect. Very high arousal causes anxiety and poor performance on complex tasks."},{t:"A moderate level of arousal, depending on task difficulty",e:"Correct. The Yerkes-Dodson law shows an inverted U-curve: moderate arousal is optimal. Simple tasks tolerate higher arousal; complex tasks need lower arousal."},{t:"The lowest possible level",e:"Incorrect. Too little arousal leads to boredom and inattention."},{t:"A constant level regardless of task",e:"Incorrect. A key insight is that optimal arousal varies with task complexity."}],c:1,d:"medium"},
+{id:60,u:7,q:"Bandura's concept of self-efficacy refers to:",a:[{t:"General self-esteem and feelings of self-worth",e:"Incorrect. Self-esteem is broader. Self-efficacy is about specific task capability."},{t:"A person's belief in their ability to succeed at specific tasks",e:"Correct. Self-efficacy is task-specific confidence that influences motivation, effort, and persistence."},{t:"Unconscious drives that motivate behavior",e:"Incorrect. That's a psychodynamic concept. Bandura emphasized conscious beliefs."},{t:"The need to achieve one's full potential",e:"Incorrect. That's Maslow's self-actualization."}],c:1,d:"easy"},
+{id:38,u:8,q:"Which disorder features persistent unwanted thoughts (obsessions) and repetitive behaviors (compulsions)?",a:[{t:"Generalized anxiety disorder",e:"Incorrect. GAD involves chronic worry about many things, without ritualistic compulsions."},{t:"Post-traumatic stress disorder",e:"Incorrect. PTSD involves flashbacks and hyperarousal from trauma, not obsessive-compulsive cycles."},{t:"Obsessive-compulsive disorder (OCD)",e:"Correct. OCD features obsessions (intrusive thoughts causing anxiety) and compulsions (repetitive behaviors to reduce anxiety)."},{t:"Panic disorder",e:"Incorrect. Panic disorder involves sudden, unexpected panic attacks."}],c:2,d:"easy"},
+{id:39,u:8,q:"The DSM-5 is best described as:",a:[{t:"A treatment manual prescribing therapies",e:"Incorrect. The DSM-5 does not prescribe treatments—it provides diagnostic criteria."},{t:"A classification system for diagnosing mental disorders based on symptoms",e:"Correct. The DSM-5 (published by APA) provides standardized criteria for classifying and diagnosing mental disorders."},{t:"A psychological test measuring personality",e:"Incorrect. The DSM-5 is a reference manual, not a test."},{t:"A brain-imaging technique",e:"Incorrect. The DSM-5 is a book, not technology."}],c:1,d:"easy"},
+{id:40,u:8,q:"Cognitive-behavioral therapy (CBT) is based on the idea that:",a:[{t:"Unconscious conflicts from childhood must be resolved",e:"Incorrect. That's psychoanalytic therapy."},{t:"Maladaptive thoughts and behaviors can be identified and changed",e:"Correct. CBT combines cognitive restructuring (changing irrational thoughts) with behavioral techniques—it's evidence-based and present-focused."},{t:"Unconditional positive regard is the primary healing force",e:"Incorrect. That's Rogers' person-centered therapy."},{t:"Medication is the most effective treatment",e:"Incorrect. CBT is psychotherapy, not pharmacology."}],c:1,d:"easy"},
+{id:41,u:8,q:"A person with dissociative identity disorder (DID) experiences:",a:[{t:"A split between thoughts and emotions, as in schizophrenia",e:"Incorrect. Common misconception. Schizophrenia involves psychosis, not multiple identities. They are completely different."},{t:"Two or more distinct personality states that alternately control behavior",e:"Correct. DID involves distinct identity states, each with its own pattern of perceiving and interacting, believed to stem from severe childhood trauma."},{t:"Persistent hallucinations and delusions",e:"Incorrect. Those are symptoms of psychotic disorders like schizophrenia."},{t:"Extreme mood swings between mania and depression",e:"Incorrect. That describes bipolar disorder."}],c:1,d:"medium"},
+{id:42,u:8,q:"SSRIs treat depression by:",a:[{t:"Increasing the production of serotonin",e:"Incorrect. SSRIs don't increase production—they prevent reabsorption of existing serotonin."},{t:"Blocking the reabsorption of serotonin, making more available in the synapse",e:"Correct. SSRIs block serotonin reuptake, leaving more in the synaptic cleft to bind with postsynaptic receptors."},{t:"Destroying excess dopamine in reward pathways",e:"Incorrect. SSRIs target serotonin, not dopamine."},{t:"Stimulating endorphin release",e:"Incorrect. SSRIs work on the serotonin system, not endorphins."}],c:1,d:"medium"},
+{id:50,u:8,q:"Systematic desensitization is a behavioral therapy primarily used to treat:",a:[{t:"Depression",e:"Incorrect. Depression is treated with CBT or medication, not desensitization."},{t:"Phobias and anxiety disorders",e:"Correct. Developed by Wolpe, systematic desensitization uses counterconditioning: learning relaxation then gradually confronting feared stimuli."},{t:"Schizophrenia",e:"Incorrect. Schizophrenia is primarily treated with antipsychotic medication."},{t:"Antisocial personality disorder",e:"Incorrect. Desensitization targets learned fear responses, not the core issues in ASPD."}],c:1,d:"easy"},
+{id:59,u:8,q:"The diathesis-stress model proposes that:",a:[{t:"All disorders are caused purely by environmental stress",e:"Incorrect. The model integrates biological predisposition WITH environmental triggers."},{t:"Disorders result from the interaction of biological predisposition and environmental stressors",e:"Correct. A genetic vulnerability (diathesis) only leads to disorder when activated by environmental stress—explaining why some people develop disorders under stress and others don't."},{t:"Mental illness is entirely genetic and inevitable",e:"Incorrect. Having a predisposition doesn't guarantee disorder—triggers are also necessary."},{t:"Stress alone causes all mental disorders",e:"Incorrect. Many people experience extreme stress without developing disorders."}],c:1,d:"medium"},
+{id:43,u:9,q:"Solomon Asch's conformity experiments demonstrated that:",a:[{t:"People will administer dangerous shocks if told to by an authority",e:"Incorrect. That's Milgram's obedience experiments."},{t:"Individuals may conform to a group's incorrect judgment even when the answer is obvious",e:"Correct. About 75% of participants conformed at least once, with ~37% overall conformity to obviously wrong answers."},{t:"Bystanders are less likely to help when others are present",e:"Incorrect. That's the bystander effect (Darley & Latané)."},{t:"People in groups make riskier decisions",e:"Incorrect. That's group polarization."}],c:1,d:"easy"},
+{id:44,u:9,q:"The fundamental attribution error is the tendency to:",a:[{t:"Attribute our own failures to external circumstances",e:"Incorrect. That's self-serving bias."},{t:"Overestimate dispositional factors and underestimate situational factors when explaining others' behavior",e:"Correct. We tend to assume others' behavior reflects their character rather than their circumstances."},{t:"Assume the world is fair and people get what they deserve",e:"Incorrect. That's the just-world hypothesis."},{t:"Change attitudes to match behaviors",e:"Incorrect. That's cognitive dissonance reduction."}],c:1,d:"medium"},
+{id:45,u:9,q:"The Stanford Prison Experiment by Zimbardo demonstrated that:",a:[{t:"People have fixed personality traits that don't change",e:"Incorrect. The experiment showed the opposite—situations powerfully alter behavior."},{t:"Situational forces and assigned roles can powerfully influence behavior",e:"Correct. Normal, healthy participants quickly adopted cruel (guards) or passive (prisoners) behaviors based on assigned roles."},{t:"Criminal behavior is primarily genetic",e:"Incorrect. The situation, not genetics, drove the behavior."},{t:"Prison rehabilitation programs are effective",e:"Incorrect. The study highlighted how dehumanizing prison environments can be."}],c:1,d:"easy"},
+{id:46,u:9,q:"Cognitive dissonance theory predicts that when behavior contradicts beliefs, a person will most likely:",a:[{t:"Ignore the inconsistency entirely",e:"Incorrect. Festinger's theory predicts discomfort motivates active change, not passive ignoring."},{t:"Change their belief or attitude to be consistent with the behavior",e:"Correct. The discomfort from contradictory beliefs and behaviors motivates people to change their attitude to justify the behavior."},{t:"Always change their behavior to match beliefs",e:"Incorrect. People more commonly change attitudes (less effort) than behavior."},{t:"Become more committed to their original belief",e:"Incorrect. Dissonance theory predicts attitude change toward consistency, not doubling down."}],c:1,d:"medium"},
+{id:47,u:9,q:"Social loafing refers to the tendency to:",a:[{t:"Work harder when being observed",e:"Incorrect. That's social facilitation."},{t:"Exert less effort when working in a group than when working alone",e:"Correct. Social loafing occurs because individuals feel less personally responsible when effort is pooled."},{t:"Lose individual identity in large groups",e:"Incorrect. That's deindividuation."},{t:"Make more extreme decisions in groups",e:"Incorrect. That's group polarization."}],c:1,d:"easy"},
+{id:56,u:9,q:"The bystander effect is best explained by:",a:[{t:"Social facilitation and arousal",e:"Incorrect. Social facilitation is about improved performance on simple tasks."},{t:"Diffusion of responsibility and pluralistic ignorance",e:"Correct. Responsibility is diffused across witnesses, and each assumes the situation isn't serious because others look calm."},{t:"Obedience to authority",e:"Incorrect. Bystander situations have no authority figure giving orders."},{t:"Cognitive dissonance about helping",e:"Incorrect. Dissonance may occur later, but doesn't explain the initial failure to act."}],c:1,d:"medium"}
+];
+
+const flashcards=[
+{id:1,u:1,t:"Hindsight Bias",d:"The tendency to believe, after learning an outcome, that you would have predicted it. Also known as the 'I-knew-it-all-along' phenomenon."},
+{id:2,u:1,t:"Operational Definition",d:"A precise statement of the procedures used to define research variables. Example: defining 'aggression' as the number of times a child hits a Bobo doll in 10 minutes."},
+{id:3,u:1,t:"Double-Blind Procedure",d:"An experiment where neither participants nor researchers know which group receives treatment. Prevents placebo effects and experimenter bias."},
+{id:4,u:1,t:"Random Assignment",d:"Assigning participants to groups by chance, minimizing pre-existing differences. This is what makes an experiment an experiment."},
+{id:5,u:1,t:"Confirmation Bias",d:"The tendency to search for information that confirms existing beliefs and to ignore contradictory evidence."},
+{id:6,u:1,t:"Standard Deviation",d:"A measure of score variability around the mean. Small SD = scores clustered near mean; large SD = scores spread out."},
+{id:7,u:1,t:"Statistical Significance",d:"Results unlikely due to chance alone (typically p < .05, meaning less than 5% probability the results are due to chance)."},
+{id:8,u:2,t:"Neurotransmitter",d:"Chemical messengers that cross the synaptic gap between neurons, binding to receptor sites and influencing whether the receiving neuron fires."},
+{id:9,u:2,t:"Endorphins",d:"Natural opioid neurotransmitters linked to pain control and pleasure. Released during exercise, excitement, and pain. They mimic morphine's effects."},
+{id:10,u:2,t:"Sympathetic Nervous System",d:"Division of the autonomic nervous system that arouses the body for fight-or-flight: increases heart rate, dilates pupils, releases adrenaline."},
+{id:11,u:2,t:"Corpus Callosum",d:"Large band of neural fibers connecting the two brain hemispheres. When severed, creates a 'split-brain' condition studied by Sperry."},
+{id:12,u:2,t:"Amygdala",d:"Limbic system clusters linked to emotion, especially fear and aggression. Crucial for forming emotional memories."},
+{id:13,u:2,t:"Broca's Area",d:"Left frontal lobe area controlling speech production. Damage causes Broca's aphasia: difficulty speaking fluently, comprehension intact."},
+{id:14,u:2,t:"Wernicke's Area",d:"Left temporal lobe area for language comprehension. Damage causes Wernicke's aphasia: fluent but meaningless speech, poor understanding."},
+{id:15,u:2,t:"Neuroplasticity",d:"The brain's ability to change and reorganize by forming new neural connections throughout life. Especially evident after brain injury."},
+{id:16,u:3,t:"Transduction",d:"The process of converting stimulus energy (light, sound, chemicals) into neural impulses the brain can interpret."},
+{id:17,u:3,t:"Weber's Law",d:"The just noticeable difference (JND) is a constant proportion of the original stimulus. You'd notice 1 lb added to 10 lbs, but not to 100 lbs."},
+{id:18,u:3,t:"Retinal Disparity",d:"Binocular depth cue: slightly different images from each eye. The brain computes distance from the difference. Greater disparity = closer object."},
+{id:19,u:3,t:"Perceptual Set",d:"A mental predisposition to perceive one thing and not another. Influenced by schemas, expectations, context, and motivation."},
+{id:20,u:3,t:"Inattentional Blindness",d:"Failing to see visible objects when attention is elsewhere. Demonstrated by the 'invisible gorilla' experiment (Simons & Chabris)."},
+{id:21,u:4,t:"Classical Conditioning",d:"Learning where a neutral stimulus triggers a response after being paired with a stimulus that naturally triggers that response. Discovered by Pavlov."},
+{id:22,u:4,t:"Operant Conditioning",d:"Learning where behavior is strengthened by reinforcers or weakened by punishers. Associated with B.F. Skinner and the Skinner box."},
+{id:23,u:4,t:"Extinction",d:"The diminishing of a conditioned response when the CS is presented without the US repeatedly."},
+{id:24,u:4,t:"Shaping",d:"Reinforcing successive approximations of a desired behavior to teach complex behaviors step by step."},
+{id:25,u:4,t:"Latent Learning",d:"Learning that occurs without apparent reinforcement, only demonstrated when there's an incentive. Shown by Tolman's rats learning mazes."},
+{id:26,u:4,t:"Mirror Neurons",d:"Frontal lobe neurons that fire when performing OR observing an action. May underlie empathy and observational learning."},
+{id:27,u:5,t:"Chunking",d:"Organizing items into meaningful units to expand working memory. Example: 480-055-51234 instead of 4-8-0-0-5-5-5-1-2-3-4."},
+{id:28,u:5,t:"Elaborative Rehearsal",d:"Relating new information to existing knowledge for deeper encoding and better retention than rote repetition."},
+{id:29,u:5,t:"Proactive Interference",d:"Old learning interferes with new learning. Example: your old phone number blocks recall of your new one."},
+{id:30,u:5,t:"Retroactive Interference",d:"New learning interferes with old learning. Example: your new locker combo makes you forget the old one."},
+{id:31,u:5,t:"Framing Effect",d:"How an issue is presented influences decisions. '75% lean' beef is preferred over '25% fat' even though they're identical."},
+{id:32,u:5,t:"Prototype",d:"The best example of a category. We judge category membership by comparing to our prototype. Robin = prototype for 'bird'; penguin is not."},
+{id:33,u:6,t:"Teratogens",d:"Agents (chemicals, viruses, drugs) that cause harm during prenatal development. Example: alcohol causes fetal alcohol syndrome."},
+{id:34,u:6,t:"Schema (Piaget)",d:"A mental framework for organizing information. Modified through assimilation (fitting new info in) and accommodation (adjusting the framework)."},
+{id:35,u:6,t:"Zone of Proximal Development",d:"Vygotsky: the range between what a child can do alone and with help. Learning occurs best within this zone through scaffolding."},
+{id:36,u:6,t:"Critical Period",d:"An optimal time window for certain development. Example: language acquisition is easiest before puberty."},
+{id:37,u:6,t:"Theory of Mind",d:"Understanding that others have their own thoughts, beliefs, and perspectives that may differ from yours. Typically develops around age 4."},
+{id:38,u:7,t:"Intrinsic vs. Extrinsic Motivation",d:"Intrinsic: doing something for its own sake (enjoyment). Extrinsic: doing something for external rewards or to avoid punishment."},
+{id:39,u:7,t:"Schachter-Singer Two-Factor Theory",d:"Emotion = physiological arousal + cognitive label. We feel emotion when we notice arousal AND label it based on the situation."},
+{id:40,u:7,t:"Ekman's Basic Emotions",d:"Six universal facial expressions across all cultures: happiness, sadness, anger, fear, surprise, disgust. Suggests evolutionary basis."},
+{id:41,u:7,t:"Reciprocal Determinism (Bandura)",d:"Behavior, cognition, and environment all influence each other in a continuous feedback loop."},
+{id:42,u:7,t:"Defense Mechanisms",d:"Unconscious ego strategies to reduce anxiety: repression (burying thoughts), projection (attributing feelings to others), rationalization (making excuses)."},
+{id:43,u:7,t:"Locus of Control (Rotter)",d:"Internal: believing you control your fate. External: believing outside forces control your fate. Internal locus linked to better outcomes."},
+{id:44,u:8,t:"Major Depressive Disorder",d:"Persistent depressed mood, loss of interest, appetite/sleep changes, fatigue, worthlessness, difficulty concentrating, lasting at least 2 weeks."},
+{id:45,u:8,t:"Schizophrenia",d:"Severe disorder: disorganized thinking, hallucinations, inappropriate emotions, abnormal motor behavior. Involves positive and negative symptoms."},
+{id:46,u:8,t:"Bipolar Disorder",d:"Alternating depression and mania (elevated mood, energy, impulsivity). Previously called manic-depressive disorder."},
+{id:47,u:8,t:"Psychoanalysis (Freud)",d:"Therapy exploring the unconscious to uncover repressed feelings. Uses free association, dream analysis, and interpretation of transference."},
+{id:48,u:8,t:"Token Economy",d:"Behavioral technique: desired behaviors earn tokens exchangeable for privileges or treats. Based on operant conditioning."},
+{id:49,u:9,t:"Conformity",d:"Adjusting behavior to match group standards. Normative: for social approval. Informational: to gain information in ambiguous situations."},
+{id:50,u:9,t:"Obedience (Milgram)",d:"65% of participants obeyed instructions to deliver what they believed were dangerous shocks. Demonstrates the power of authority."},
+{id:51,u:9,t:"Groupthink",d:"Suppressing dissent for group harmony, leading to poor decisions. Prevented by encouraging open debate and devil's advocate roles."},
+{id:52,u:9,t:"Deindividuation",d:"Loss of self-awareness and restraint in anonymous group situations, leading to impulsive behavior (mob behavior, online trolling)."},
+{id:53,u:9,t:"Just-World Hypothesis",d:"The belief that people get what they deserve. Can lead to victim-blaming."},
+{id:54,u:9,t:"Mere Exposure Effect",d:"Repeated exposure to a stimulus increases liking for it. Explains preference for familiar faces, songs, and brands."},
+{id:55,u:9,t:"Foot-in-the-Door Phenomenon",d:"Agreeing to a small request makes you more likely to comply with a larger one later. People want to be consistent with prior behavior."}
+];
+
+// ============================
+// APP STATE
+// ============================
+let state={mode:'menu',flashUnit:null,flashIdx:0,flashFlipped:false,flashKnown:new Set(),flashHideKnown:false,quizUnit:null,quizCount:10,quizStarted:false,quizQs:[],quizIdx:0,quizSel:null,quizShowExp:false,quizResults:[],quizDone:false,mpPhase:'setup',mpPlayers:[{name:'',score:0,answers:[]},{name:'',score:0,answers:[]}],mpUnit:null,mpCount:10,mpQs:[],mpQIdx:0,mpPIdx:0,mpSel:null,mpShowExp:false,mpAllAnswered:false};
+
+const PCOLS=['pd0','pd1','pd2','pd3','pd4','pd5'];
+const PBGS=['pb0','pb1','pb2','pb3','pb4','pb5'];
+const PODS=['pod0','pod1','pod2','pod3','pod4','pod5'];
+
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function $(s){return document.querySelector(s)}
+function $$(s){return document.querySelectorAll(s)}
+
+// ============================
+// RENDER
+// ============================
+function render(){
+  const app=document.getElementById('app');
+  switch(state.mode){
+    case 'menu':app.innerHTML=renderMenu();break;
+    case 'flashcards':app.innerHTML=renderFlash();break;
+    case 'quiz':app.innerHTML=state.quizDone?renderQuizResults():state.quizStarted?renderQuizPlay():renderQuizSetup();break;
+    case 'multiplayer':app.innerHTML=state.mpPhase==='setup'?renderMPSetup():state.mpPhase==='results'?renderMPResults():renderMPPlay();break;
+  }
+  bindEvents();
+}
+
+// MENU
+function renderMenu(){
+  const qc=questions.length,fc=flashcards.length;
+  let unitCards=UNITS.map(u=>{
+    const qn=questions.filter(q=>q.u===u.number).length;
+    const fn=flashcards.filter(f=>f.u===u.number).length;
+    return `<div class="flex items-center gap-4 p-4 rounded-xl border" style="background:rgba(30,30,74,.5)">
+      <div class="shrink-0" style="width:40px;height:40px;border-radius:8px;background:var(--p6a);display:flex;align-items:center;justify-content:center;color:var(--p4);font-weight:700">${u.number}</div>
+      <div class="min-w-0"><p class="text-white text-sm font-bold truncate">${u.name}</p><p class="text-gray-500 text-xs">${qn} questions · ${fn} cards</p></div>
+    </div>`;
+  }).join('');
+
+  return `<div style="max-width:960px;margin:0 auto;padding:16px">
+    <div class="text-center" style="padding:48px 0 32px">
+      <div class="badge badge-p mb-4" style="display:inline-flex;align-items:center;gap:6px"><span class="pulse" style="width:8px;height:8px;border-radius:50%;background:var(--p4);display:inline-block"></span> 2025 AP Psychology Exam Prep</div>
+      <h1 class="text-4xl font-extrabold text-white mb-3">AP Psych <span style="background:linear-gradient(90deg,var(--p4),var(--a5));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Mastery</span></h1>
+      <p class="text-lg text-gray-400 mb-3" style="max-width:600px;margin:0 auto">Study smarter with flashcards, test yourself with detailed quizzes, and challenge your friends in multiplayer mode.</p>
+      <div class="flex items-center justify-center gap-6 text-sm text-gray-500 mb-10">
+        <span>${qc} questions</span><span style="width:4px;height:4px;border-radius:50%;background:#4b5563"></span><span>${fc} flashcards</span><span style="width:4px;height:4px;border-radius:50%;background:#4b5563"></span><span>9 units</span>
+      </div>
+      <div class="grid3" style="max-width:840px;margin:0 auto">
+        <div class="card card-mode" data-action="flash">
+          <div class="icon-circle ic-blue mb-4">📇</div>
+          <h2 class="text-xl font-bold text-white mb-2">Study Mode</h2>
+          <p class="text-gray-400 text-sm leading-relaxed">${fc} flashcards across all 9 units. Mark cards you know and focus on what you need.</p>
+          <div class="mt-4 flex items-center gap-1 text-p4 text-sm font-medium">Start studying →</div>
+        </div>
+        <div class="card card-mode" data-action="quiz">
+          <div class="icon-circle ic-purple mb-4">🧠</div>
+          <h2 class="text-xl font-bold text-white mb-2">Quiz Mode</h2>
+          <p class="text-gray-400 text-sm leading-relaxed">${qc} multiple-choice questions. Every answer has a detailed explanation of why it's right or wrong.</p>
+          <div class="mt-4 flex items-center gap-1 text-p4 text-sm font-medium">Take a quiz →</div>
+        </div>
+        <div class="card card-mode" data-action="multi">
+          <div class="icon-circle ic-orange mb-4">🏆</div>
+          <h2 class="text-xl font-bold text-white mb-2">Multiplayer</h2>
+          <p class="text-gray-400 text-sm leading-relaxed">Up to 6 players take turns on the same questions. See who knows more at the end!</p>
+          <div class="mt-4 flex items-center gap-1 text-a4 text-sm font-medium">Start a game →</div>
+        </div>
+      </div>
+    </div>
+    <h2 class="text-2xl font-bold text-white mb-6 text-center">All 9 AP Psychology Units</h2>
+    <div class="grid3 mb-8">${unitCards}</div>
+    <div class="text-center text-gray-600 text-sm" style="padding:24px 0;border-top:1px solid rgba(255,255,255,.05)">Built for AP Psychology exam preparation. Aligned with College Board AP Psychology framework.</div>
+  </div>`;
+}
+
+// FLASHCARDS
+function renderFlash(){
+  const s=state;
+  let cards=flashcards.filter(c=>s.flashUnit===null||c.u===s.flashUnit);
+  if(s.flashHideKnown)cards=cards.filter(c=>!s.flashKnown.has(c.id));
+  const card=cards[s.flashIdx];
+  const progress=cards.length?((s.flashIdx+1)/cards.length*100):0;
+
+  let unitBtns=`<button class="btn-sm ${s.flashUnit===null?'btn-active':'btn-ghost'}" data-funit="all">All Units</button>`+UNITS.map(u=>`<button class="btn-sm ${s.flashUnit===u.number?'btn-active':'btn-ghost'}" data-funit="${u.number}">Unit ${u.number}</button>`).join('');
+
+  let cardHTML='';
+  if(card){
+    cardHTML=`<div class="perspective" style="max-width:640px;margin:0 auto;cursor:pointer" data-action="flip-card">
+      <div class="preserve-3d card-inner${s.flashFlipped?' flipped':''}" style="position:relative;min-height:300px">
+        <div class="backface-hidden" style="position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,#1e1e4a,#2a2a6a);border:1px solid rgba(76,110,245,.15);padding:32px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <span class="text-p4 text-sm font-medium mb-4 tracking-wider uppercase">Unit ${card.u} · Term</span>
+          <h2 class="text-2xl font-bold text-white text-center">${card.t}</h2>
+          <span class="text-gray-600 text-sm mt-6">Click to reveal definition</span>
+        </div>
+        <div class="backface-hidden card-back" style="position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,#1a3a2a,#1e4a3a);border:1px solid rgba(34,197,94,.15);padding:32px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <span class="text-grn text-sm font-medium mb-4 tracking-wider uppercase">Definition</span>
+          <p class="text-lg text-gray-200 text-center leading-relaxed">${card.d}</p>
+          <span class="text-gray-600 text-sm mt-6">Click to see term</span>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center justify-center gap-3 mt-6 mb-3">
+      <button class="btn-sm btn-ghost" data-action="flash-prev" style="padding:10px 14px">← Prev</button>
+      <button class="btn-sm" style="background:var(--grn-bg);color:var(--grn);border:1px solid var(--grn-bdr);padding:10px 20px" data-action="flash-know">✓ I Know This</button>
+      <button class="btn-sm btn-ghost" data-action="flash-next" style="padding:10px 14px">Next →</button>
+    </div>
+    <p class="text-center text-gray-500 text-sm">Card ${s.flashIdx+1} of ${cards.length}</p>`;
+  } else {
+    cardHTML=`<div class="text-center" style="padding:80px 0"><div class="text-6xl mb-4">🎉</div><h2 class="text-2xl font-bold text-white mb-2">You know all the cards!</h2><p class="text-gray-400 mb-6">Great job! Reset to study again.</p><button class="btn-primary" data-action="flash-reset">Reset & Study Again</button></div>`;
+  }
+
+  return `<div class="container">
+    <button class="flex items-center gap-2 text-p3 text-sm mb-6" data-action="back">← Back to Menu</button>
+    <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
+      <div><h1 class="text-3xl font-bold text-white">Flashcards</h1><p class="text-gray-400 text-sm mt-1">${cards.length} cards${s.flashKnown.size?' · '+s.flashKnown.size+' known':''}</p></div>
+      <div class="flex gap-2">
+        <button class="btn-sm ${s.flashHideKnown?'btn-active':'btn-ghost'}" data-action="flash-toggle-known">${s.flashHideKnown?'Show All':'Hide Known'}</button>
+        <button class="btn-sm btn-ghost" data-action="flash-reset-known">Reset Known</button>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-2 mb-6">${unitBtns}</div>
+    <div class="progress-bar mb-8"><div class="progress-fill" style="width:${progress}%"></div></div>
+    ${cardHTML}
+  </div>`;
+}
+
+function renderFlashFlipped(){
+  const ci=$('.card-inner');
+  if(ci){
+    state.flashFlipped=!state.flashFlipped;
+    ci.classList.toggle('flipped');
+    // prevent full re-render for smooth animation
+  }
+}
+
+// QUIZ SETUP
+function renderQuizSetup(){
+  const s=state;
+  const avail=questions.filter(q=>s.quizUnit===null||q.u===s.quizUnit);
+  let unitBtns=`<button class="btn-sm ${s.quizUnit===null?'btn-active':'btn-ghost'}" data-qunit="all">All Units (${questions.length})</button>`+UNITS.map(u=>{
+    const n=questions.filter(q=>q.u===u.number).length;
+    return `<button class="btn-sm ${s.quizUnit===u.number?'btn-active':'btn-ghost'}" data-qunit="${u.number}">Unit ${u.number} (${n})</button>`;
+  }).join('');
+
+  let countBtns=[5,10,15,20,avail.length].map(n=>`<button class="btn-sm ${s.quizCount===n?'btn-active':'btn-ghost'}" data-qcount="${n}">${n===avail.length?'All ('+n+')':n}</button>`).join('');
+
+  return `<div class="container">
+    <button class="flex items-center gap-2 text-p3 text-sm mb-6" data-action="back">← Back to Menu</button>
+    <h1 class="text-3xl font-bold text-white mb-2">Quiz Mode</h1>
+    <p class="text-gray-400 mb-8">Test yourself with detailed explanations for every answer choice.</p>
+    <div class="card mb-6"><h2 class="text-lg font-bold text-white mb-4">Select Unit</h2><div class="flex flex-wrap gap-2">${unitBtns}</div></div>
+    <div class="card mb-8"><h2 class="text-lg font-bold text-white mb-4">Number of Questions</h2><div class="flex flex-wrap gap-3">${countBtns}</div></div>
+    <button class="btn-primary w-full" data-action="quiz-start">Start Quiz</button>
+  </div>`;
+}
+
+// QUIZ PLAY
+function renderQuizPlay(){
+  const s=state,q=s.quizQs[s.quizIdx];
+  const score=s.quizResults.filter(r=>r.correct).length;
+  const diffColors={easy:'badge-grn',medium:'badge-yel',hard:'badge-red'};
+
+  let answers=q.a.map((a,i)=>{
+    let cls='answer-btn',lbCls='letter-box';
+    if(s.quizSel!==null){
+      if(i===q.c){cls+=' correct';lbCls+=' correct-box'}
+      else if(i===s.quizSel){cls+=' incorrect';lbCls+=' incorrect-box'}
+    }
+    return `<button class="${cls}" data-ans="${i}" ${s.quizSel!==null?'disabled':''}>
+      <div class="flex items-center gap-3" style="align-items:flex-start">
+        <span class="${lbCls}">${s.quizSel!==null&&i===q.c?'✓':s.quizSel!==null&&i===s.quizSel?'✗':String.fromCharCode(65+i)}</span>
+        <div class="flex-1">
+          <span class="font-medium ${s.quizSel!==null&&i===q.c?'text-grn3':s.quizSel!==null&&i===s.quizSel?'text-red3':'text-gray-200'}">${a.t}</span>
+          ${s.quizShowExp?`<p class="mt-2 text-sm leading-relaxed fade-in ${i===q.c?'text-grn4':'text-gray-500'}">${a.e}</p>`:''}
+        </div>
+      </div>
+    </button>`;
+  }).join('');
+
+  let nextBtn=s.quizSel!==null?`<button class="btn-primary w-full slide-up" data-action="quiz-next">${s.quizIdx+1>=s.quizQs.length?'See Results':'Next Question →'}</button>`:'';
+
+  return `<div class="container">
+    <div class="flex justify-between items-center mb-6"><button class="text-gray-400 text-sm" data-action="back">← Exit Quiz</button><div class="flex items-center gap-4"><span class="text-gray-400 text-sm">${s.quizIdx+1}/${s.quizQs.length}</span><span class="text-p4 font-medium">Score: ${score}/${s.quizResults.length}</span></div></div>
+    <div class="progress-bar mb-8"><div class="progress-fill" style="width:${(s.quizIdx+1)/s.quizQs.length*100}%"></div></div>
+    <div class="mb-6"><div class="flex gap-2 mb-3"><span class="badge badge-p">Unit ${q.u}</span><span class="badge ${diffColors[q.d]}">${q.d}</span></div><h2 class="text-xl font-bold text-white leading-relaxed">${q.q}</h2></div>
+    <div class="flex-col gap-3 mb-8" style="display:flex">${answers}</div>
+    ${nextBtn}
+  </div>`;
+}
+
+// QUIZ RESULTS
+function renderQuizResults(){
+  const s=state,score=s.quizResults.filter(r=>r.correct).length,pct=Math.round(score/s.quizResults.length*100);
+  const grade=pct>=90?{l:'5',c:'text-grn',m:'Outstanding! You\'re AP exam ready!'}:pct>=80?{l:'4',c:'text-blue',m:'Great work! Almost there.'}:pct>=70?{l:'3',c:'text-yellow',m:'Solid foundation. Keep studying!'}:pct>=60?{l:'2',c:'text-orange',m:'Getting there. Review weak areas.'}:{l:'1',c:'text-red',m:'More study needed. You\'ve got this!'};
+
+  let missed=s.quizResults.filter(r=>!r.correct).map((r,i)=>`<div class="card mb-3" style="border-color:var(--red-bdr)">
+    <p class="text-white font-medium mb-3">${r.question.q}</p>
+    <div class="flex items-center gap-2 mb-2" style="align-items:flex-start"><span class="text-red text-sm">✗</span><div><span class="text-red3 text-sm">Your answer: ${r.question.a[r.sel].t}</span><p class="text-gray-500 text-xs mt-1">${r.question.a[r.sel].e}</p></div></div>
+    <div class="flex items-center gap-2" style="align-items:flex-start"><span class="text-grn text-sm">✓</span><div><span class="text-grn3 text-sm">Correct: ${r.question.a[r.question.c].t}</span><p class="text-gray-500 text-xs mt-1">${r.question.a[r.question.c].e}</p></div></div>
+  </div>`).join('');
+
+  return `<div class="container text-center">
+    <div class="text-6xl mb-4">${pct>=80?'🎉':pct>=60?'📚':'💪'}</div>
+    <h1 class="text-3xl font-bold text-white mb-2">Quiz Complete!</h1>
+    <div class="flex items-center justify-center gap-6 mt-6 mb-2">
+      <div><div class="text-5xl font-bold text-white">${score}/${s.quizResults.length}</div><div class="text-gray-400 text-sm mt-1">Correct</div></div>
+      <div style="width:1px;height:64px;background:var(--border)"></div>
+      <div><div class="text-5xl font-bold ${grade.c}">${pct}%</div><div class="text-gray-400 text-sm mt-1">Score</div></div>
+      <div style="width:1px;height:64px;background:var(--border)"></div>
+      <div><div class="text-5xl font-bold ${grade.c}">${grade.l}</div><div class="text-gray-400 text-sm mt-1">AP Score Est.</div></div>
+    </div>
+    <p class="mt-2 mb-8 text-lg ${grade.c}">${grade.m}</p>
+    ${missed?`<div class="text-left mb-8"><h2 class="text-xl font-bold text-white mb-4">Review Missed (${s.quizResults.filter(r=>!r.correct).length})</h2>${missed}</div>`:''}
+    <div class="flex gap-4"><button class="btn-primary flex-1" data-action="quiz-retry">Try Again</button><button class="btn-sm btn-ghost flex-1" style="padding:12px" data-action="quiz-setup">Change Settings</button><button class="btn-sm btn-ghost flex-1" style="padding:12px" data-action="back">Menu</button></div>
+  </div>`;
+}
+
+// MULTIPLAYER SETUP
+function renderMPSetup(){
+  const s=state;
+  let playerInputs=s.mpPlayers.map((p,i)=>`<div class="flex items-center gap-3">
+    <div class="player-dot ${PCOLS[i%6]}"></div>
+    <input class="input flex-1" value="${p.name}" placeholder="Player ${i+1}" data-mpname="${i}">
+    ${s.mpPlayers.length>2?`<button class="text-gray-500 text-sm" data-mpremove="${i}">✕</button>`:''}
+  </div>`).join('');
+
+  let unitBtns=`<button class="btn-sm ${s.mpUnit===null?'btn-active':'btn-ghost'}" data-mpunit="all">All Units</button>`+UNITS.map(u=>`<button class="btn-sm ${s.mpUnit===u.number?'btn-active':'btn-ghost'}" data-mpunit="${u.number}">Unit ${u.number}</button>`).join('');
+
+  let countBtns=[5,10,15,20].map(n=>`<button class="btn-sm ${s.mpCount===n?'btn-active':'btn-ghost'}" data-mpcount="${n}">${n}</button>`).join('');
+
+  return `<div class="container">
+    <button class="flex items-center gap-2 text-p3 text-sm mb-6" data-action="back">← Back to Menu</button>
+    <h1 class="text-3xl font-bold text-white mb-2">Multiplayer Quiz</h1>
+    <p class="text-gray-400 mb-8">Take turns answering the same questions, then see who knows more.</p>
+    <div class="card mb-6"><h2 class="text-lg font-bold text-white mb-4">Players</h2><div class="flex-col gap-3" style="display:flex">${playerInputs}</div>${s.mpPlayers.length<6?`<button class="text-p4 text-sm font-medium mt-3" data-action="mp-add">+ Add Player</button>`:''}</div>
+    <div class="card mb-6"><h2 class="text-lg font-bold text-white mb-4">Select Unit</h2><div class="flex flex-wrap gap-2">${unitBtns}</div></div>
+    <div class="card mb-8"><h2 class="text-lg font-bold text-white mb-4">Rounds</h2><div class="flex gap-3">${countBtns}</div></div>
+    <button class="btn-accent w-full" data-action="mp-start">Start Game!</button>
+  </div>`;
+}
+
+// MULTIPLAYER PLAY
+function renderMPPlay(){
+  const s=state,q=s.mpQs[s.mpQIdx],cp=s.mpPlayers[s.mpPIdx];
+
+  let scorebar=s.mpPlayers.map((p,i)=>`<div class="flex items-center gap-2 rounded-full border text-sm whitespace-nowrap" style="padding:6px 12px;${i===s.mpPIdx&&!s.mpAllAnswered?'background:'+['rgba(59,130,246,.15)','rgba(168,85,247,.15)','rgba(249,115,22,.15)','rgba(34,197,94,.15)','rgba(239,68,68,.15)','rgba(99,102,241,.15)'][i%6]+';border-color:'+['rgba(59,130,246,.3)','rgba(168,85,247,.3)','rgba(249,115,22,.3)','rgba(34,197,94,.3)','rgba(239,68,68,.3)','rgba(99,102,241,.3)'][i%6]:'background:rgba(0,0,0,.15);border-color:rgba(255,255,255,.05)'}">
+    <div class="player-dot ${PCOLS[i%6]}"></div>
+    <span class="${i===s.mpPIdx&&!s.mpAllAnswered?'text-white font-medium':'text-gray-400'}">${p.name}</span>
+    <span class="text-p4 font-bold">${p.score}</span>
+  </div>`).join('');
+
+  let answers=q.a.map((a,i)=>{
+    let cls='answer-btn',lbCls='letter-box';
+    if(s.mpSel!==null&&s.mpAllAnswered){
+      if(i===q.c){cls+=' correct';lbCls+=' correct-box'}
+    } else if(s.mpSel===i){
+      cls+=' selected';lbCls+=' selected-box';
+    }
+    return `<button class="${cls}" data-mpans="${i}" ${s.mpSel!==null?'disabled':''}>
+      <div class="flex items-center gap-3" style="align-items:flex-start">
+        <span class="${lbCls}">${s.mpAllAnswered&&i===q.c?'✓':String.fromCharCode(65+i)}</span>
+        <div class="flex-1">
+          <span class="font-medium ${s.mpAllAnswered&&i===q.c?'text-grn3':'text-gray-200'}">${a.t}</span>
+          ${s.mpShowExp&&s.mpAllAnswered?`<p class="mt-2 text-sm leading-relaxed fade-in ${i===q.c?'text-grn4':'text-gray-500'}">${a.e}</p>`:''}
+        </div>
+      </div>
+    </button>`;
+  }).join('');
+
+  let turnIndicator=!s.mpAllAnswered?`<div class="text-center rounded-xl border mb-6" style="padding:12px;${`background:${['rgba(59,130,246,.15)','rgba(168,85,247,.15)','rgba(249,115,22,.15)','rgba(34,197,94,.15)','rgba(239,68,68,.15)','rgba(99,102,241,.15)'][s.mpPIdx%6]};border-color:${['rgba(59,130,246,.3)','rgba(168,85,247,.3)','rgba(249,115,22,.3)','rgba(34,197,94,.3)','rgba(239,68,68,.3)','rgba(99,102,241,.3)'][s.mpPIdx%6]}`}"><span class="text-white font-bold text-lg">${cp.name} — Choose your answer!</span></div>`:'';
+
+  let actionBtn='';
+  if(s.mpSel!==null&&!s.mpAllAnswered){
+    const next=s.mpPlayers[(s.mpPIdx+1)%s.mpPlayers.length];
+    actionBtn=`<button class="btn-accent w-full slide-up" data-action="mp-next-turn">Pass to ${next.name} →</button>`;
+  }
+  if(s.mpAllAnswered){
+    let roundSummary=s.mpPlayers.map((p,i)=>{
+      const ans=p.answers[s.mpQIdx];
+      const ok=ans===q.c;
+      return `<span class="badge ${ok?'badge-grn':'badge-red'}" style="padding:4px 12px">${p.name} ${ok?'✓':'✗'}</span>`;
+    }).join('');
+    actionBtn=`<div class="slide-up"><div class="card mb-3"><p class="text-gray-400 text-sm mb-2">Round ${s.mpQIdx+1} results:</p><div class="flex flex-wrap gap-2">${roundSummary}</div></div>
+      <button class="btn-primary w-full" data-action="mp-next-q">${s.mpQIdx+1>=s.mpQs.length?'See Final Results 🏆':'Next Round →'}</button></div>`;
+  }
+
+  return `<div class="container">
+    <div class="flex flex-wrap gap-2 mb-6 overflow-x-auto" style="padding-bottom:4px">${scorebar}</div>
+    <div class="flex justify-between mb-2"><span class="text-gray-400 text-sm">Round ${s.mpQIdx+1} of ${s.mpQs.length}</span>${!s.mpAllAnswered?`<span class="text-white font-medium text-sm anim-pulse">${cp.name}'s turn</span>`:''}</div>
+    <div class="progress-bar mb-6"><div class="progress-fill" style="width:${(s.mpQIdx+1)/s.mpQs.length*100}%"></div></div>
+    ${turnIndicator}
+    <div class="mb-6"><span class="badge badge-p mb-3">Unit ${q.u}</span><h2 class="text-xl font-bold text-white leading-relaxed mt-2">${q.q}</h2></div>
+    <div class="flex-col gap-3 mb-8" style="display:flex">${answers}</div>
+    ${actionBtn}
+  </div>`;
+}
+
+// MULTIPLAYER RESULTS
+function renderMPResults(){
+  const s=state;
+  const sorted=[...s.mpPlayers].sort((a,b)=>b.score-a.score);
+  const isTie=sorted.filter(p=>p.score===sorted[0].score).length>1;
+  const medals=['🥇','🥈','🥉'];
+  const heights=[160,128,96];
+
+  let podium=sorted.slice(0,3).map((p,i)=>{
+    const pi=s.mpPlayers.findIndex(x=>x.name===p.name);
+    return `<div class="flex-col items-center" style="display:flex"><span class="text-3xl mb-2">${medals[i]}</span><span class="text-white font-bold mb-1">${p.name}</span><span class="text-2xl font-bold text-p4 mb-2">${p.score}/${s.mpQs.length}</span><div class="podium-bar ${PODS[pi%6]}" style="height:${heights[i]}px"></div></div>`;
+  }).join('');
+
+  let board=sorted.map((p,i)=>{
+    const pi=s.mpPlayers.findIndex(x=>x.name===p.name);
+    const pct=Math.round(p.score/s.mpQs.length*100);
+    return `<div class="flex items-center gap-4 p-3 rounded-xl border ${PBGS[pi%6]}"><span class="text-2xl font-bold text-gray-500" style="width:32px">#${i+1}</span><div class="player-dot ${PCOLS[pi%6]}"></div><span class="text-white font-medium flex-1">${p.name}</span><span class="text-gray-400">${p.score}/${s.mpQs.length}</span><span class="text-p4 font-bold" style="width:48px;text-align:right">${pct}%</span></div>`;
+  }).join('');
+
+  let review=s.mpQs.map((q,qi)=>{
+    let pResults=s.mpPlayers.map((p,pi)=>{
+      const ok=p.answers[qi]===q.c;
+      return `<span class="badge ${ok?'badge-grn':'badge-red'}" style="padding:2px 8px;font-size:.75rem">${p.name} ${ok?'✓':'✗'}</span>`;
+    }).join('');
+    return `<div style="padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,.04)">
+      <p class="text-white text-sm font-medium mb-1">Q${qi+1}: ${q.q}</p>
+      <p class="text-grn text-xs mb-2">✓ ${q.a[q.c].t}</p>
+      <div class="flex flex-wrap gap-2">${pResults}</div>
+    </div>`;
+  }).join('');
+
+  return `<div class="container text-center">
+    <div class="text-6xl mb-4">🏆</div>
+    <h1 class="text-4xl font-bold text-white mb-2">${isTie?"It's a Tie!":sorted[0].name+' Wins!'}</h1>
+    <p class="text-gray-400 mb-10">${s.mpQs.length} rounds completed</p>
+    <div class="flex items-end justify-center gap-4 mb-10">${podium}</div>
+    <div class="card mb-8 text-left"><h2 class="text-lg font-bold text-white mb-4">Full Scoreboard</h2><div class="flex-col gap-3" style="display:flex">${board}</div></div>
+    <div class="card mb-8 text-left"><h2 class="text-lg font-bold text-white mb-4">Question Review</h2>${review}</div>
+    <div class="flex gap-4"><button class="btn-primary flex-1" data-action="mp-replay">Play Again</button><button class="btn-sm btn-ghost flex-1" style="padding:12px" data-action="back">Menu</button></div>
+  </div>`;
+}
+
+// ============================
+// EVENT BINDING
+// ============================
+function bindEvents(){
+  // Menu cards
+  document.querySelectorAll('[data-action="flash"]').forEach(el=>el.onclick=()=>{state.mode='flashcards';state.flashIdx=0;state.flashFlipped=false;render()});
+  document.querySelectorAll('[data-action="quiz"]').forEach(el=>el.onclick=()=>{state.mode='quiz';state.quizStarted=false;state.quizDone=false;render()});
+  document.querySelectorAll('[data-action="multi"]').forEach(el=>el.onclick=()=>{state.mode='multiplayer';state.mpPhase='setup';render()});
+  document.querySelectorAll('[data-action="back"]').forEach(el=>el.onclick=()=>{state.mode='menu';render()});
+
+  // Flashcard events
+  document.querySelectorAll('[data-action="flip-card"]').forEach(el=>el.onclick=()=>renderFlashFlipped());
+  document.querySelectorAll('[data-funit]').forEach(el=>el.onclick=()=>{const v=el.dataset.funit;state.flashUnit=v==='all'?null:+v;state.flashIdx=0;state.flashFlipped=false;render()});
+  document.querySelectorAll('[data-action="flash-prev"]').forEach(el=>el.onclick=()=>{let cards=flashcards.filter(c=>state.flashUnit===null||c.u===state.flashUnit);if(state.flashHideKnown)cards=cards.filter(c=>!state.flashKnown.has(c.id));state.flashFlipped=false;state.flashIdx=state.flashIdx===0?cards.length-1:state.flashIdx-1;render()});
+  document.querySelectorAll('[data-action="flash-next"]').forEach(el=>el.onclick=()=>{let cards=flashcards.filter(c=>state.flashUnit===null||c.u===state.flashUnit);if(state.flashHideKnown)cards=cards.filter(c=>!state.flashKnown.has(c.id));state.flashFlipped=false;state.flashIdx=(state.flashIdx+1)%cards.length;render()});
+  document.querySelectorAll('[data-action="flash-know"]').forEach(el=>el.onclick=()=>{let cards=flashcards.filter(c=>state.flashUnit===null||c.u===state.flashUnit);if(state.flashHideKnown)cards=cards.filter(c=>!state.flashKnown.has(c.id));const card=cards[state.flashIdx];if(card)state.flashKnown.add(card.id);state.flashFlipped=false;if(state.flashIdx>=cards.length-1)state.flashIdx=Math.max(0,cards.length-2);render()});
+  document.querySelectorAll('[data-action="flash-toggle-known"]').forEach(el=>el.onclick=()=>{state.flashHideKnown=!state.flashHideKnown;state.flashIdx=0;state.flashFlipped=false;render()});
+  document.querySelectorAll('[data-action="flash-reset-known"]').forEach(el=>el.onclick=()=>{state.flashKnown=new Set();state.flashIdx=0;state.flashFlipped=false;render()});
+  document.querySelectorAll('[data-action="flash-reset"]').forEach(el=>el.onclick=()=>{state.flashKnown=new Set();state.flashIdx=0;state.flashFlipped=false;state.flashHideKnown=false;render()});
+
+  // Quiz events
+  document.querySelectorAll('[data-qunit]').forEach(el=>el.onclick=()=>{const v=el.dataset.qunit;state.quizUnit=v==='all'?null:+v;render()});
+  document.querySelectorAll('[data-qcount]').forEach(el=>el.onclick=()=>{state.quizCount=+el.dataset.qcount;render()});
+  document.querySelectorAll('[data-action="quiz-start"]').forEach(el=>el.onclick=()=>{const avail=questions.filter(q=>state.quizUnit===null||q.u===state.quizUnit);state.quizQs=shuffle(avail).slice(0,Math.min(state.quizCount,avail.length));state.quizIdx=0;state.quizSel=null;state.quizShowExp=false;state.quizResults=[];state.quizDone=false;state.quizStarted=true;render()});
+  document.querySelectorAll('[data-ans]').forEach(el=>el.onclick=()=>{if(state.quizSel!==null)return;const i=+el.dataset.ans;state.quizSel=i;state.quizShowExp=true;const q=state.quizQs[state.quizIdx];state.quizResults.push({question:q,sel:i,correct:i===q.c});render()});
+  document.querySelectorAll('[data-action="quiz-next"]').forEach(el=>el.onclick=()=>{if(state.quizIdx+1>=state.quizQs.length){state.quizDone=true}else{state.quizIdx++;state.quizSel=null;state.quizShowExp=false}render()});
+  document.querySelectorAll('[data-action="quiz-retry"]').forEach(el=>el.onclick=()=>{const avail=questions.filter(q=>state.quizUnit===null||q.u===state.quizUnit);state.quizQs=shuffle(avail).slice(0,Math.min(state.quizCount,avail.length));state.quizIdx=0;state.quizSel=null;state.quizShowExp=false;state.quizResults=[];state.quizDone=false;render()});
+  document.querySelectorAll('[data-action="quiz-setup"]').forEach(el=>el.onclick=()=>{state.quizStarted=false;state.quizDone=false;render()});
+
+  // Multiplayer events
+  document.querySelectorAll('[data-mpname]').forEach(el=>{el.oninput=()=>{state.mpPlayers[+el.dataset.mpname].name=el.value}});
+  document.querySelectorAll('[data-mpremove]').forEach(el=>el.onclick=()=>{if(state.mpPlayers.length>2){state.mpPlayers.splice(+el.dataset.mpremove,1);render()}});
+  document.querySelectorAll('[data-action="mp-add"]').forEach(el=>el.onclick=()=>{if(state.mpPlayers.length<6){state.mpPlayers.push({name:'',score:0,answers:[]});render()}});
+  document.querySelectorAll('[data-mpunit]').forEach(el=>el.onclick=()=>{const v=el.dataset.mpunit;state.mpUnit=v==='all'?null:+v;render()});
+  document.querySelectorAll('[data-mpcount]').forEach(el=>el.onclick=()=>{state.mpCount=+el.dataset.mpcount;render()});
+  document.querySelectorAll('[data-action="mp-start"]').forEach(el=>el.onclick=()=>{state.mpPlayers=state.mpPlayers.map((p,i)=>({...p,name:p.name.trim()||'Player '+(i+1),score:0,answers:[]}));const avail=questions.filter(q=>state.mpUnit===null||q.u===state.mpUnit);state.mpQs=shuffle(avail).slice(0,Math.min(state.mpCount,avail.length));state.mpQIdx=0;state.mpPIdx=0;state.mpSel=null;state.mpShowExp=false;state.mpAllAnswered=false;state.mpPhase='playing';render()});
+  document.querySelectorAll('[data-mpans]').forEach(el=>el.onclick=()=>{if(state.mpSel!==null)return;const i=+el.dataset.mpans;state.mpSel=i;const q=state.mpQs[state.mpQIdx];const ok=i===q.c;state.mpPlayers[state.mpPIdx].score+=ok?1:0;state.mpPlayers[state.mpPIdx].answers.push(i);render()});
+  document.querySelectorAll('[data-action="mp-next-turn"]').forEach(el=>el.onclick=()=>{const next=state.mpPIdx+1;if(next<state.mpPlayers.length){state.mpPIdx=next;state.mpSel=null;state.mpShowExp=false}else{state.mpShowExp=true;state.mpAllAnswered=true}render()});
+  document.querySelectorAll('[data-action="mp-next-q"]').forEach(el=>el.onclick=()=>{if(state.mpQIdx+1>=state.mpQs.length){state.mpPhase='results'}else{state.mpQIdx++;state.mpPIdx=0;state.mpSel=null;state.mpShowExp=false;state.mpAllAnswered=false}render()});
+  document.querySelectorAll('[data-action="mp-replay"]').forEach(el=>el.onclick=()=>{state.mpPhase='setup';state.mpPlayers=state.mpPlayers.map(p=>({...p,score:0,answers:[]}));render()});
+}
+
+// Boot
+render();
+</script>
+</body>
+</html>
